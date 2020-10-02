@@ -49,7 +49,7 @@ yarn test
 
 ### Siempre usa la expresión de función y usa los tipos
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 function addRoverToGame(game: Game, rover: Rover): Game {
@@ -57,7 +57,7 @@ function addRoverToGame(game: Game, rover: Rover): Game {
 }
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 type AddRovertoGame = (game: Game, rover: Rover) => Game;
@@ -69,14 +69,14 @@ const addRoverToGame: AddRovertoGame = (game, rover) => {
 
 ### Nombra todo (significativo, facil de buscar, explicativo)
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 // What the heck is 86400000 for?
 setTimeout(blastOff, 86400000);
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 // Declare them as capitalized named constants.
@@ -87,7 +87,7 @@ setTimeout(blastOff, MILLISECONDS_IN_A_DAY);
 
 ### Las funciones no deben aceptar ningún argumento booleano
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 const effectiveDate = isBourquin => {
@@ -97,7 +97,7 @@ const effectiveDate = isBourquin => {
 }
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const bourquinEffectiveDate = () {
@@ -107,7 +107,7 @@ const bourquinEffectiveDate = () {
 
 ### Encapsular condicionales
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 if (keyCode >= 48 && keyCode <= 57) {
@@ -115,7 +115,7 @@ if (keyCode >= 48 && keyCode <= 57) {
 }
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const isNumberKeyPressed = keyCode => {
@@ -129,7 +129,7 @@ if (isNumberKeyPressed(keyCode)) {
 
 ### Evita las condicionales negativas
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 const isDOMNodeNotPresent = (node) => {
@@ -141,7 +141,7 @@ if (!isDOMNodeNotPresent(node)) {
 }
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const isDOMNodePresent = (node) => {
@@ -155,7 +155,7 @@ if (isDOMNodePresent(node)) {
 
 ### Usa argumentos predeterminados en lugar de cortocircuitos o condicionales
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 const createMicrobrewery = (name) => {
@@ -164,7 +164,7 @@ const createMicrobrewery = (name) => {
 };
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const createMicrobrewery = (name = "Hipster Brew Co.") => {
@@ -174,7 +174,7 @@ const createMicrobrewery = (name = "Hipster Brew Co.") => {
 
 ### Pon siempre los parámetros predeterminados al final
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 const handleThings = (opts = {}, name) => {
@@ -182,7 +182,7 @@ const handleThings = (opts = {}, name) => {
 };
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const handleThings = (name, opts = {}) => {
@@ -192,7 +192,7 @@ const handleThings = (name, opts = {}) => {
 
 ### Nunca cambies (mutar) los parámetros
 
-**Malo: ⛔️**
+**Mal: ⛔️**
 
 ```javascript
 const f1 = (obj) => {
@@ -200,7 +200,7 @@ const f1 = (obj) => {
 };
 ```
 
-**Bueno: ✅**
+**Bien: ✅**
 
 ```javascript
 const f2 = (obj) => {
