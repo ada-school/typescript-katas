@@ -2,6 +2,13 @@
 
 [English](README.md) 🇺🇸 | [Español](README.es.md) 🇨🇴
 
+## ¿Cómo empezar?
+
+1. Lee los desafíos, decide por **uno**
+2. Seleccione **una** restricción de la Kata
+3. Empieca a utilizar **TDD** y ten en cuenta los estándares de codificación
+4. ¡**Diviértete!**
+
 ## TDD con estilo
 
 Como buena práctica y estándar de la industria haremos [TDD](https://en.wikipedia.org/wiki/Test-driven_development), para ejecutar las pruebas puedes ejecutar el siguiente comando:

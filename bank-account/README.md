@@ -2,6 +2,13 @@
 
 [English](README.md) 🇺🇸 | [Español](README.es.md) 🇨🇴
 
+## How to start?
+
+1. Read the challenges, decide for **one** to tackle.
+2. Select **one** constraint
+3. Start using **TDD** and keep in mind the Coding standards
+4. **Have fun!**
+
 ## Initial Resources
 
 You will find the initial configuration for running [tests](index.test.ts) and some [models](src/models.d.ts) already provided.
