@@ -1,9 +1,9 @@
-interface User {
+interface IUser {
   id: string;
   name: string;
 }
 
-interface BankAccount {
+interface IBankAccount {
   accountNumber: string;
   holder: User;
   balance: number;
@@ -15,7 +15,7 @@ enum TransactionType {
 }
 
 interface Transaction {
-  accountNumber: BankAccount["accountNumber"];
+  accountNumber: IBankAccount["accountNumber"];
   transactionType: TransactionType;
   createdAt: Date;
   amount: number;

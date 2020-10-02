@@ -11,7 +11,7 @@
 
 ## Initial Resources
 
-You will find the initial configuration for running [tests](index.test.ts) and some [models](src/models.d.ts) already provided.
+You will find the initial configuration for running [tests](src/index.test.ts) and some [models](src/models.d.ts) already provided.
 
 ## TDD style
 

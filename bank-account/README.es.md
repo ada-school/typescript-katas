@@ -9,6 +9,11 @@
 3. Inicia utilizando **TDD** y ten en cuenta los estándares de codificación
 4. ¡**Diviértete!**
 
+## Recursos Iniciales
+
+Podrás encontrar la configuración inicial para ejectura las [pruebas](src/index.test.ts) y algunos [modelos](src/models.d.ts)
+listos para usar.
+
 ## TDD con estilo
 
 Como buena práctica y estándar de la industria haremos [TDD](https://en.wikipedia.org/wiki/Test-driven_development). Para ejecutar las pruebas puedes ejecutar el siguiente comando:
