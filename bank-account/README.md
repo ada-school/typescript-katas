@@ -31,15 +31,15 @@ yarn test
 
 ## Challenge 1 rules
 
-- Deposits and withdrawals can be maded into an account
-- Each deposit or withdrawal will have the amount of the operation and the date of the operation
+- Deposits and withdrawals can be maded into an account.
+- Each deposit or withdrawal will have the amount of the operation and the date of the operation.
 - You should be able to transfer between accounts. A transfer will appear as a withdrawal in the account of the transferor and as a deposit on the account of the transferee.
-- A statement can be requested at any time. The statement will contain for each entry the date, the amount of the statement, and the balance of the account after the entry.
+- A statement can be requested at any time. The statement will contain for each entry the date, the amount of the statement, and the balance of the account.
 
 ## Challenge 2 rules
 
-- You should be able to filter the statement (only deposits, only withdrawals, date)
-- You should store the statements in a DB
+- You should be able to filter the statement (only deposits, only withdrawals, date).
+- You should store the statements in a DB.
 
 ## Coding Standards
 

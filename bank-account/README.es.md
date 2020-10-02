@@ -5,13 +5,13 @@
 ## ¿Cómo empezar?
 
 1. Lee los desafíos, decide por **uno**
-2. Seleccione **una** restricción de la Kata
-3. Empieca a utilizar **TDD** y ten en cuenta los estándares de codificación
+2. Selecciona **una** restricción de la Kata
+3. Inicia utilizando **TDD** y ten en cuenta los estándares de codificación
 4. ¡**Diviértete!**
 
 ## TDD con estilo
 
-Como buena práctica y estándar de la industria haremos [TDD](https://en.wikipedia.org/wiki/Test-driven_development), para ejecutar las pruebas puedes ejecutar el siguiente comando:
+Como buena práctica y estándar de la industria haremos [TDD](https://en.wikipedia.org/wiki/Test-driven_development). Para ejecutar las pruebas puedes ejecutar el siguiente comando:
 
 ```shell
 yarn test
@@ -27,10 +27,10 @@ yarn test
 
 ## Reglas del desafío 1
 
-- Los depósitos y retiros se pueden realizar en una cuenta
-- Cada depósito o retiro tendrá el monto de la operación y la fecha de la operación
+- Los depósitos y retiros se pueden realizar en una cuenta.
+- Cada depósito o retiro tendrá el monto de la operación y la fecha de la operación.
 - Debería poder transferir entre cuentas. Una transferencia aparecerá como un retiro en la cuenta del cedente y como un depósito en la cuenta del cesionario.
-- Se puede solicitar una declaración en cualquier momento. El estado de cuenta contendrá para cada entrada la fecha, el monto del estado de cuenta y el saldo de la cuenta después de la entrada.
+- Se puede solicitar una declaración en cualquier momento. El estado de cuenta contendrá para cada entrada la fecha, el monto del estado de cuenta y el saldo de la cuenta.
 
 ## Reglas del desafío 2
 
