@@ -17,7 +17,7 @@ You will find the initial configuration for running [tests](index.test.ts) and s
 
 As a good practice and industry standard we will do [TDD](https://en.wikipedia.org/wiki/Test-driven_development), in order to run the tests you can run the following command:
 
-```
+```shell
 yarn test
 ```
 

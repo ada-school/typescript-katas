@@ -13,7 +13,7 @@
 
 Como buena práctica y estándar de la industria haremos [TDD](https://en.wikipedia.org/wiki/Test-driven_development), para ejecutar las pruebas puedes ejecutar el siguiente comando:
 
-```
+```shell
 yarn test
 ```
 
