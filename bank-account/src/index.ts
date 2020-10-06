@@ -12,6 +12,14 @@ export class BankAccount implements IBankAccount {
   deposit(amount: number): void {
     this.balance += amount;
   }
+
+  withdraw(amount: number): void {
+    const isBalanceGreaterOrEqualThanAmount = this.balance >= amount;
+
+    if (isBalanceGreaterOrEqualThanAmount) {
+      this.balance -= amount;
+    }
+  }
 }
 
 export class User implements IUser {
