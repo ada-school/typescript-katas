@@ -1,4 +1,4 @@
-import { BankAccount, User } from "./index";
+import { BankAccount, User, InsuficientFundsError } from "./index";
 
 test("should run a test", () => {
   expect(true).toBeTruthy();
@@ -32,7 +32,17 @@ test("should not change the balance when the withdraw amount is greater than the
   const greaterThanBalanceWithdrawal = 600;
 
   bankAccount.deposit(initialBalance);
-  bankAccount.withdraw(greaterThanBalanceWithdrawal);
+  expect(bankAccount.withdraw(greaterThanBalanceWithdrawal)).toEqual(
+    new InsuficientFundsError()
+  );
 
   expect(bankAccount.balance).toEqual(initialBalance);
+});
+
+test("should throw exception when the user withdraws and the current balance is 0", () => {
+  const user = new User("Mauricio Hernandez", "1231321");
+  const bankAccount = new BankAccount(user);
+  expect(bankAccount.balance).toEqual(0);
+
+  expect(bankAccount.withdraw(100)).toEqual(new InsuficientFundsError());
 });

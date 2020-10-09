@@ -13,11 +13,13 @@ export class BankAccount implements IBankAccount {
     this.balance += amount;
   }
 
-  withdraw(amount: number): void {
+  withdraw(amount: number): void | Error {
     const isBalanceGreaterOrEqualThanAmount = this.balance >= amount;
 
     if (isBalanceGreaterOrEqualThanAmount) {
       this.balance -= amount;
+    } else {
+      return new InsuficientFundsError();
     }
   }
 }
@@ -28,5 +30,12 @@ export class User implements IUser {
   constructor(name: string, id: string) {
     this.name = name;
     this.id = id;
+  }
+}
+
+export class InsuficientFundsError extends Error {
+  constructor() {
+    super("Insuficient funds, cannot widthdraw");
+    Object.setPrototypeOf(this, InsuficientFundsError.prototype);
   }
 }
