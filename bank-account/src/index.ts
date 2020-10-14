@@ -1,3 +1,13 @@
+export class Receipt {
+  amount: number;
+  date: Date;
+
+  constructor(amount: number, date: Date) {
+    this.amount = amount;
+    this.date = date;
+  }
+}
+
 export class BankAccount implements IBankAccount {
   accountNumber: string;
   holder: User;
@@ -9,13 +19,17 @@ export class BankAccount implements IBankAccount {
     this.balance = 0;
   }
 
-  deposit(amount: number): void {
+  deposit(amount: number): Receipt {
     this.balance += amount;
+
+    return new Receipt(amount, new Date());
   }
 
   withdraw(amount: number): void | Error {
-    const isBalanceGreaterOrEqualThanAmount = this.balance >= amount;
+    const isAmountNegative = amount < 0;
+    if (isAmountNegative) return new InvalidWithdrawAmount();
 
+    const isBalanceGreaterOrEqualThanAmount = this.balance >= amount;
     if (isBalanceGreaterOrEqualThanAmount) {
       this.balance -= amount;
     } else {
@@ -37,5 +51,12 @@ export class InsuficientFundsError extends Error {
   constructor() {
     super("Insuficient funds, cannot widthdraw");
     Object.setPrototypeOf(this, InsuficientFundsError.prototype);
+  }
+}
+
+export class InvalidWithdrawAmount extends Error {
+  constructor() {
+    super("Invalid withdraw Amount");
+    Object.setPrototypeOf(this, InvalidWithdrawAmount.prototype);
   }
 }
