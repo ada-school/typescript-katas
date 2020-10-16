@@ -6,15 +6,7 @@ import {
   Receipt,
 } from "./index";
 
-const RealDate = Date;
-
-beforeEach(() => {
-  global.Date.now = jest.fn(() => new Date("2019-04-22T10:20:30Z").getTime());
-});
-
-afterEach(() => {
-  global.Date = RealDate;
-});
+import MockDate from "mockdate";
 
 test("should run a test", () => {
   expect(true).toBeTruthy();
@@ -72,9 +64,17 @@ test("Cuando hago un deposito de dinero en la cuenta debe tener monto y fecha de
   const user = new User("mauricio", "12345");
   const bankAccount = new BankAccount(user);
   const depositAmount = 100;
-  const date = new Date("2019-04-22T10:20:30Z");
+  const fakeDate = new Date("2019-04-22T10:20:30Z");
+
+  MockDate.set(fakeDate);
 
   expect(bankAccount.deposit(depositAmount)).toEqual(
-    new Receipt(depositAmount, date)
+    new Receipt(depositAmount, fakeDate)
   );
+
+  MockDate.reset();
+});
+
+test("deberia retornar un error cuando intento hacer un deposito negativo", () => {
+  // TODO
 });
