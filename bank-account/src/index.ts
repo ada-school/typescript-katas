@@ -19,7 +19,10 @@ export class BankAccount implements IBankAccount {
     this.balance = 0;
   }
 
-  deposit(amount: number): Receipt {
+  deposit(amount: number): Receipt | Error {
+    const isAmountNegative = amount < 0;
+    if (isAmountNegative) return new InvalidDepositAmount();
+
     this.balance += amount;
 
     return new Receipt(amount, new Date());
@@ -35,6 +38,18 @@ export class BankAccount implements IBankAccount {
     } else {
       return new InsuficientFundsError();
     }
+  }
+  transferTo(
+    accountRecipient: BankAccount,
+    transferAmount: number
+  ): void | Error {
+    const withdrawResult = this.withdraw(transferAmount);
+
+    if (withdrawResult instanceof Error) {
+      return withdrawResult;
+    }
+
+    accountRecipient.deposit(transferAmount);
   }
 }
 
@@ -58,5 +73,12 @@ export class InvalidWithdrawAmount extends Error {
   constructor() {
     super("Invalid withdraw Amount");
     Object.setPrototypeOf(this, InvalidWithdrawAmount.prototype);
+  }
+}
+
+export class InvalidDepositAmount extends Error {
+  constructor() {
+    super("Invalid deposit amount");
+    Object.setPrototypeOf(this, InvalidDepositAmount.prototype);
   }
 }

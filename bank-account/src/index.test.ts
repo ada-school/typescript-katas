@@ -3,6 +3,7 @@ import {
   User,
   InsuficientFundsError,
   InvalidWithdrawAmount,
+  InvalidDepositAmount,
   Receipt,
 } from "./index";
 
@@ -76,5 +77,36 @@ test("Cuando hago un deposito de dinero en la cuenta debe tener monto y fecha de
 });
 
 test("deberia retornar un error cuando intento hacer un deposito negativo", () => {
-  // TODO
+  const user = new User("reddy", "12345");
+  const bankAccount = new BankAccount(user);
+  const negativeDepositAmount = -100;
+
+  expect(bankAccount.deposit(negativeDepositAmount)).toEqual(
+    new InvalidDepositAmount()
+  );
+});
+
+test("Cuando el usuario hace una transferencia, el total del recipient debe subir y el total del depositante debe bajar", () => {
+  const recipient = new User("reddy", "12345");
+  const depositor = new User("henry", "6789");
+  const accountRecipient = new BankAccount(recipient);
+  const accountDepositor = new BankAccount(depositor);
+  const transferAmount = 100;
+
+  accountDepositor.deposit(100);
+
+  accountDepositor.transferTo(accountRecipient, transferAmount);
+
+  expect(accountDepositor.balance).toEqual(0);
+  expect(accountRecipient.balance).toEqual(100);
+});
+
+test("When transfering and there's no balance in the depositor account an InsuficientFundsError is returned", () => {
+  const depositor = new User("Henry Black", "123132132");
+  const recipient = new User("Reddy Tintaya", "124312");
+  const recipientAccount = new BankAccount(recipient);
+  const depositorAccount = new BankAccount(depositor);
+  const transfer = depositorAccount.transferTo(recipientAccount, 100);
+
+  expect(transfer).toEqual(new InsuficientFundsError());
 });
