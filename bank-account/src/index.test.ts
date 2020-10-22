@@ -5,6 +5,7 @@ import {
   InvalidWithdrawAmount,
   InvalidDepositAmount,
   Receipt,
+  TransferReceipt,
 } from "./index";
 
 import MockDate from "mockdate";
@@ -109,4 +110,31 @@ test("When transfering and there's no balance in the depositor account an Insufi
   const transfer = depositorAccount.transferTo(recipientAccount, 100);
 
   expect(transfer).toEqual(new InsuficientFundsError());
+});
+
+test("Cuando se realiza una transferencia se debe retornar el recibo de la transferencia", () => {
+  const depositor = new User("depositor", "1234");
+  const recipient = new User("recipient", "3446");
+  const recipientAccount = new BankAccount(recipient);
+  const depositorAccount = new BankAccount(depositor);
+
+  depositorAccount.deposit(100);
+
+  const fakeDate = new Date("2019-04-22T10:20:30Z");
+  MockDate.set(fakeDate);
+
+  const transferReceipt = depositorAccount.transferTo(recipientAccount, 100);
+
+  const expectedTransferReceipt = new TransferReceipt(
+    100,
+    fakeDate,
+    depositorAccount,
+    recipientAccount
+  );
+
+  expect(transferReceipt).toEqual(expectedTransferReceipt);
+
+  MockDate.reset();
+
+  //YAGNI.(you ain't gonna need it!!!!)
 });

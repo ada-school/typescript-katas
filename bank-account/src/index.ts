@@ -8,6 +8,22 @@ export class Receipt {
   }
 }
 
+export class TransferReceipt extends Receipt {
+  depositorAccount: BankAccount;
+  recipientAccount: BankAccount;
+
+  constructor(
+    amount: number,
+    date: Date,
+    depositorAccount: BankAccount,
+    recipientAccount: BankAccount
+  ) {
+    super(amount, date);
+    this.depositorAccount = depositorAccount;
+    this.recipientAccount = recipientAccount;
+  }
+}
+
 export class BankAccount implements IBankAccount {
   accountNumber: string;
   holder: User;

@@ -34,7 +34,7 @@ yarn test
 
 - Los depósitos y retiros se pueden realizar en una cuenta.
 - Cada depósito o retiro tendrá el monto de la operación y la fecha de la operación.
-- Debería poder transferir entre cuentas. Una transferencia aparecerá como un retiro en la cuenta del cedente y como un depósito en la cuenta del cesionario.
+- Debería poder transferir entre cuentas. Una transferencia aparecerá como un retiro en la cuenta del depositante y como un depósito en la cuenta del cesionario.
 - Se puede solicitar una declaración en cualquier momento. El estado de cuenta contendrá para cada entrada la fecha, el monto del estado de cuenta y el saldo de la cuenta.
 
 ## Reglas del desafío 2
