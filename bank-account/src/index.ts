@@ -58,7 +58,7 @@ export class BankAccount implements IBankAccount {
   transferTo(
     accountRecipient: BankAccount,
     transferAmount: number
-  ): void | Error {
+  ): Error | TransferReceipt {
     const withdrawResult = this.withdraw(transferAmount);
 
     if (withdrawResult instanceof Error) {
@@ -66,6 +66,13 @@ export class BankAccount implements IBankAccount {
     }
 
     accountRecipient.deposit(transferAmount);
+
+    return new TransferReceipt(
+      transferAmount,
+      new Date(),
+      this,
+      accountRecipient
+    );
   }
 }
 

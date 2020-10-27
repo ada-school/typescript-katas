@@ -117,16 +117,21 @@ test("Cuando se realiza una transferencia se debe retornar el recibo de la trans
   const recipient = new User("recipient", "3446");
   const recipientAccount = new BankAccount(recipient);
   const depositorAccount = new BankAccount(depositor);
+  const initialBalance = 200;
+  const transferAmount = 100;
 
-  depositorAccount.deposit(100);
+  depositorAccount.deposit(initialBalance);
 
   const fakeDate = new Date("2019-04-22T10:20:30Z");
   MockDate.set(fakeDate);
 
-  const transferReceipt = depositorAccount.transferTo(recipientAccount, 100);
+  const transferReceipt = depositorAccount.transferTo(
+    recipientAccount,
+    transferAmount
+  );
 
   const expectedTransferReceipt = new TransferReceipt(
-    100,
+    transferAmount,
     fakeDate,
     depositorAccount,
     recipientAccount
@@ -138,3 +143,27 @@ test("Cuando se realiza una transferencia se debe retornar el recibo de la trans
 
   //YAGNI.(you ain't gonna need it!!!!)
 });
+
+test("cuando se realiza una transferencia se debe reflejar en las cuentas el valor transferido y retirado", () => {
+  const depositor = new User("depositor", "1234");
+  const recipient = new User("recipient", "3446");
+  const recipientAccount = new BankAccount(recipient);
+  const depositorAccount = new BankAccount(depositor);
+
+  // Property based testing
+  const initialBalance = Math.random() * 100 + 100;
+  const transferAmount = Math.random() * 20 + 20;
+
+  depositorAccount.deposit(initialBalance);
+  depositorAccount.transferTo(recipientAccount, transferAmount);
+
+  const expectedRecipientBalance = transferAmount;
+  const expectedDepositorBalance = initialBalance - transferAmount;
+
+  expect(recipientAccount.balance).toEqual(expectedRecipientBalance);
+  expect(depositorAccount.balance).toEqual(expectedDepositorBalance);
+});
+
+test.skip("retornar un error cuando el monto de la transferencia es negativo", () => {});
+
+test.skip("retornar un error cuando no existe la cuenta a la que se transfiere", () => {});
