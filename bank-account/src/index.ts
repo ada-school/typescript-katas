@@ -35,9 +35,13 @@ export class BankAccount implements IBankAccount {
     this.balance = 0;
   }
 
+  private isAmountNegative(amount: number): boolean {
+    return amount < 0;
+  }
+
   deposit(amount: number): Receipt | Error {
-    const isAmountNegative = amount < 0;
-    if (isAmountNegative) return new InvalidDepositAmount();
+    if (this.isAmountNegative(amount))
+      return new OperationAmountCannotBeNegativeError();
 
     this.balance += amount;
 
@@ -45,8 +49,8 @@ export class BankAccount implements IBankAccount {
   }
 
   withdraw(amount: number): void | Error {
-    const isAmountNegative = amount < 0;
-    if (isAmountNegative) return new InvalidWithdrawAmount();
+    if (this.isAmountNegative(amount))
+      return new OperationAmountCannotBeNegativeError();
 
     const isBalanceGreaterOrEqualThanAmount = this.balance >= amount;
     if (isBalanceGreaterOrEqualThanAmount) {
@@ -92,16 +96,9 @@ export class InsuficientFundsError extends Error {
   }
 }
 
-export class InvalidWithdrawAmount extends Error {
+export class OperationAmountCannotBeNegativeError extends Error {
   constructor() {
-    super("Invalid withdraw Amount");
-    Object.setPrototypeOf(this, InvalidWithdrawAmount.prototype);
-  }
-}
-
-export class InvalidDepositAmount extends Error {
-  constructor() {
-    super("Invalid deposit amount");
-    Object.setPrototypeOf(this, InvalidDepositAmount.prototype);
+    super("Operation Amount can not be negative");
+    Object.setPrototypeOf(this, OperationAmountCannotBeNegativeError.prototype);
   }
 }

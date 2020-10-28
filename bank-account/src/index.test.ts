@@ -2,10 +2,9 @@ import {
   BankAccount,
   User,
   InsuficientFundsError,
-  InvalidWithdrawAmount,
-  InvalidDepositAmount,
   Receipt,
   TransferReceipt,
+  OperationAmountCannotBeNegativeError,
 } from "./index";
 
 import MockDate from "mockdate";
@@ -59,7 +58,9 @@ test("should return an error when the user withdraws and the current balance is 
 test("should return an error when the user withdraws a negative amount", () => {
   const user = new User("Reddy tintaya", "8432290");
   const bankAccount = new BankAccount(user);
-  expect(bankAccount.withdraw(-100)).toEqual(new InvalidWithdrawAmount());
+  expect(bankAccount.withdraw(-100)).toEqual(
+    new OperationAmountCannotBeNegativeError()
+  );
 });
 
 test("Cuando hago un deposito de dinero en la cuenta debe tener monto y fecha de la operacion ", () => {
@@ -83,7 +84,7 @@ test("deberia retornar un error cuando intento hacer un deposito negativo", () =
   const negativeDepositAmount = -100;
 
   expect(bankAccount.deposit(negativeDepositAmount)).toEqual(
-    new InvalidDepositAmount()
+    new OperationAmountCannotBeNegativeError()
   );
 });
 
@@ -164,6 +165,18 @@ test("cuando se realiza una transferencia se debe reflejar en las cuentas el val
   expect(depositorAccount.balance).toEqual(expectedDepositorBalance);
 });
 
-test.skip("retornar un error cuando el monto de la transferencia es negativo", () => {});
+test("Cuando el monto de la transferencia es negativo debe retornar un InvalidTransferAmount Error", () => {
+  const depositor = new User("depositor", "1234");
+  const recipient = new User("recipient", "3446");
+  const recipientAccount = new BankAccount(recipient);
+  const depositorAccount = new BankAccount(depositor);
+
+  const negativeAmount = -300;
+  const transferReceipt = depositorAccount.transferTo(
+    recipientAccount,
+    negativeAmount
+  );
+  expect(transferReceipt).toEqual(new OperationAmountCannotBeNegativeError());
+});
 
 test.skip("retornar un error cuando no existe la cuenta a la que se transfiere", () => {});
