@@ -179,4 +179,35 @@ test("Cuando el monto de la transferencia es negativo debe retornar un InvalidTr
   expect(transferReceipt).toEqual(new OperationAmountCannotBeNegativeError());
 });
 
-test.skip("retornar un error cuando no existe la cuenta a la que se transfiere", () => {});
+// TODO: Siguiente paso: Mejorar el API para guardar el listado de transacciones
+test("Cuando se llame la funcion getBankStatement , esta retorna una declaración de la cuenta incluyendo fecha, monto y balance", () => {
+  const recipient = new User("recipient", "1234");
+  const recipientAccount = new BankAccount(recipient);
+  const depositorUser = new User("depositor", "1234");
+  const depositorAccount = new BankAccount(depositorUser);
+
+  const expectedTransactions = new Array<TransferReceipt>();
+  const transferAmount = 1000;
+  const date = new Date();
+  const expectedTransferReceipt = new TransferReceipt(
+    transferAmount,
+    date,
+    depositorAccount,
+    recipientAccount
+  );
+  expectedTransactions.push(expectedTransferReceipt);
+
+  const transferReceipt = depositorAccount.transferTo(
+    recipientAccount,
+    transferAmount
+  );
+
+  const bankStatement = recipientAccount.getBankStatement();
+
+  const expectedBankStatement = new BankStatement(
+    date,
+    recipientAccount,
+    expectedTransactions
+  );
+  expect(bankStatement).toEqual(expectedBankStatement);
+});
