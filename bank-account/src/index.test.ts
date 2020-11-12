@@ -5,6 +5,7 @@ import {
   Receipt,
   TransferReceipt,
   OperationAmountCannotBeNegativeError,
+  TransactionManager,
 } from "./index";
 
 import MockDate from "mockdate";
@@ -181,28 +182,40 @@ test("Cuando el monto de la transferencia es negativo debe retornar un InvalidTr
 
 // TODO: Siguiente paso: Mejorar el API para guardar el listado de transacciones
 test("Cuando se llame la funcion getBankStatement , esta retorna una declaración de la cuenta incluyendo fecha, monto y balance", () => {
-  const recipient = new User("recipient", "1234");
-  const recipientAccount = new BankAccount(recipient);
-  const depositorUser = new User("depositor", "1234");
+  
+  const recipientUser = new User("recipient", "12346");
+  const depositorUser = new User("depositor", "12345");
+  
+  
+  const recipientAccount = new BankAccount(recipientUser);
   const depositorAccount = new BankAccount(depositorUser);
+  
+  const bankUsersAccount = [recipientAccount, depositorAccount];
+  const transactionManager = new TransactionManager(bankUsersAccount);
 
   const expectedTransactions = new Array<TransferReceipt>();
   const transferAmount = 1000;
   const date = new Date();
+  
   const expectedTransferReceipt = new TransferReceipt(
     transferAmount,
     date,
     depositorAccount,
     recipientAccount
-  );
+    );
+    
   expectedTransactions.push(expectedTransferReceipt);
-
-  const transferReceipt = depositorAccount.transferTo(
-    recipientAccount,
-    transferAmount
+    
+  const numberDepositorAccount = depositorAccount.accountNumber;
+  const numberRecipientAccount = recipientAccount.accountNumber;
+    
+  transactionManager.transferTo(
+      numberDepositorAccount,
+      numberRecipientAccount,
+      transferAmount
   );
 
-  const bankStatement = recipientAccount.getBankStatement();
+  const bankStatement = transactionManager.getBankStatement(depositorAccount);
 
   const expectedBankStatement = new BankStatement(
     date,

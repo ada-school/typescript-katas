@@ -102,3 +102,16 @@ export class OperationAmountCannotBeNegativeError extends Error {
     Object.setPrototypeOf(this, OperationAmountCannotBeNegativeError.prototype);
   }
 }
+
+
+export class TransactionManager {
+  
+  accounts = new Map<String, BankAccount>();
+    constructor(bankAccounts: Array<BankAccount>) {
+
+        bankAccounts.map((bankAccount) => {
+            this.accounts.set(bankAccount.accountNumber, bankAccount)
+        })
+
+    }
+}
